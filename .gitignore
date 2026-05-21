@@ -1,18 +1,24 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# Виртуальное окружение
+Lib/
+Scripts/
+pyvenv.cfg
 
-# Virtual environments
+# Альтернативно, если переместишь venv в папку venv/
 venv/
 env/
 ENV/
 env.bak/
 venv.bak/
 
+# Файлы компиляции
+__pycache__/
+*.py[cod]
+*$py.class
+
 # IDEs
 .idea/
 .vscode/
 
-# Environment variables
+# Секреты
 .env
+/example.txt
