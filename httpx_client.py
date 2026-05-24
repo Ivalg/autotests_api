@@ -17,6 +17,6 @@ client = httpx.Client(
 )
 
 # Выполняем запрос с авторизацией
-get_user_response = client.get("api/v1/users/me")
+get_user_response = client.get("/api/v1/users/me")
 get_user_response_data = get_user_response.json()
 print("User data:", get_user_response_data)

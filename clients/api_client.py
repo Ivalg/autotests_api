@@ -14,7 +14,7 @@ class APIClient:
     def get(self, url: URL | str, params: QueryParams | None = None) -> Response:
         """
         GET запрос
-        :param url: URL-адрес эндпоинта
+        :param url: URL-адрес
         :param params: query Параметры запроса (?key=value)
         :return: объект Response с данными ответа
         """
@@ -29,7 +29,7 @@ class APIClient:
     ) -> Response:
         """
         POST запрос
-        :param url: URL-адрес эндпоинта
+        :param url: URL-адрес
         :param json: Данные в формате JSON
         :param data: Форматированные данные формы (например, application/x-www-form-urlencoded)
         :param files: Файлы для загрузки на сервер
@@ -39,8 +39,8 @@ class APIClient:
 
     def patch(self, url: URL | str, json: Any | None = None) -> Response:
         """
-        PATCH-запрос (частичное обновление данных)
-        :param url: URL-адрес эндпоинта
+        PATCH-запрос
+        :param url: URL-адрес
         :param json: Данные для обновления в формате JSON
         :return: Объект Response с данными ответа
         """
@@ -48,8 +48,8 @@ class APIClient:
 
     def delete(self, url: URL | str) -> Response:
         """
-        DELETE-запрос (удаление данных)
-        :param url: URL-адрес эндпоинта
+        DELETE-запрос
+        :param url: URL-адрес
         :return: Объект Response с данными ответа
         """
         return self.client.delete(url)
