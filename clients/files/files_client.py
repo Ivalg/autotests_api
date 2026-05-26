@@ -40,5 +40,4 @@ class FilesClient(APIClient):
         :return: Объект httpx.Response
         """
         return self.delete(f"/api/v1/files/{file_id}")
-
-
+ 
