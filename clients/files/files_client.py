@@ -1,4 +1,5 @@
 from clients.api_client import APIClient
+from clients.private_http_builder import AuthenticationUserDict, get_private_http_client
 from typing import TypedDict
 from httpx import Response
 
@@ -40,4 +41,13 @@ class FilesClient(APIClient):
         :return: Объект httpx.Response
         """
         return self.delete(f"/api/v1/files/{file_id}")
- 
+
+
+# builder для FilesClient
+def get_files_client(user: AuthenticationUserDict) -> FilesClient:
+    """
+    Функция создает экземпляр FilesClient с уже настроенным HTTP клиентом
+
+    :return: Готовый к использованию FilesClient
+    """
+    return FilesClient(client=get_private_http_client(user))
