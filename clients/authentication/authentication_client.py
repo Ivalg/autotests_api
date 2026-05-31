@@ -40,7 +40,7 @@ class AuthenticationClient(APIClient):
         """
         Метод выполняет аутентификацию пользователя
         :param request: Словарь с email / password
-        :return: Ответ от сервера. Объект httpx.Response
+        :return: Объект httpx.Response
         """
         return self.post("/api/v1/authentication/login", json=request)
 
@@ -49,7 +49,7 @@ class AuthenticationClient(APIClient):
         Метод обновляет токен авторизации
 
         :param request: Словарь refreshToken
-        :return: Ответ от сервера. Объект httpx.Response
+        :return: Объект httpx.Response
         """
         return self.post("/api/v1/authentication/refresh", json=request)
 
