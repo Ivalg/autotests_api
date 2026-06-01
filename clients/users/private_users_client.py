@@ -1,5 +1,5 @@
 from clients.api_client import APIClient
-from clients.private_http_builder import get_private_http_client, AuthenticationUserDict
+from clients.private_http_builder import get_private_http_client, AuthenticationUserSchema
 from httpx import Response
 from typing import TypedDict
 
@@ -68,7 +68,7 @@ class PrivateUserClient(APIClient):
 
 
 # builder для PrivateUserClient
-def get_private_users_client(user: AuthenticationUserDict) -> PrivateUserClient:
+def get_private_users_client(user: AuthenticationUserSchema) -> PrivateUserClient:
     """
     Функция создает экземпляр PrivateUserClient с уже настроенным HTTP клиентом
     :param user:

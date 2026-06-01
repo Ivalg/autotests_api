@@ -1,7 +1,7 @@
 from clients.api_client import APIClient
 from clients.files.files_client import File
 from clients.users.private_users_client import User
-from clients.private_http_builder import get_private_http_client, AuthenticationUserDict
+from clients.private_http_builder import get_private_http_client, AuthenticationUserSchema
 from typing import TypedDict
 from httpx import Response, QueryParams
 
@@ -98,7 +98,7 @@ class CoursesClient(APIClient):
 
 
 # builder для CoursesClient
-def get_courses_client(user: AuthenticationUserDict) -> CoursesClient:
+def get_courses_client(user: AuthenticationUserSchema) -> CoursesClient:
     """
     Функция создает экземпляр CoursesClient с уже настроенным HTTP клиентом
 
