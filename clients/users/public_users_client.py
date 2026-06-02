@@ -1,50 +1,24 @@
-from typing import TypedDict
 from httpx import Response
 from clients.api_client import APIClient
 from clients.public_http_builder import get_public_http_client
-
-
-class User(TypedDict):
-    """Описание структуры пользователя"""
-    id: str
-    email: str
-    lastName: str
-    firstName: str
-    middleName: str
-
-
-class CreateUserRequestDict(TypedDict):
-    """
-    Описание структуры запроса на создание пользователя
-    """
-    email: str
-    password: str
-    firstName: str
-    lastName: str
-    middleName: str
-
-
-class CreateUserResponseDict(TypedDict):
-    """Описание структуры создания пользователя"""
-    user: User
+from clients.users.users_schema import CreateUserRequestSchema, CreateUserResponseSchema
 
 
 class PublicUsersClient(APIClient):
     """
     Клиент для /api/v1/users
     """
-    def create_user_api(self, request: CreateUserRequestDict) -> Response:
+    def create_user_api(self, request: CreateUserRequestSchema) -> Response:
         """
-        Создание пользователя
-
+        Метод создания пользователя
         :param request: Словарь с данными пользователя
         :return: Объект httpx.Response
         """
-        return self.post("/api/v1/users", json=request)
+        return self.post("/api/v1/users", json=request.model_dump(by_alias=True))
 
-    def create_user(self, request: CreateUserRequestDict) -> CreateUserResponseDict:
+    def create_user(self, request: CreateUserRequestSchema) -> CreateUserResponseSchema:
         response = self.create_user_api(request)
-        return response.json()
+        return CreateUserResponseSchema.model_validate_json(response.text)
 
 
 # builder для PublicUsersClient
