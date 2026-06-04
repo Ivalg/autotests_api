@@ -39,8 +39,11 @@ class Fake:
         return self.faker.first_name()
 
     def middle_name(self) -> str:
-        """Генерирует случайное отчество"""
-        return self.faker.middle_name()
+        """Генерирует случайное отчество для RU локали, и first_name если нет"""
+        try:
+            return self.faker.middle_name()
+        except AttributeError:
+            return self.faker.first_name()
 
     def integer(self, start: int = 1, end: int = 100) -> int:
         """Генерирует случайное целое число в заданном диапазоне"""

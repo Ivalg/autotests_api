@@ -7,18 +7,13 @@ from clients.files.files_client import get_files_client
 from clients.files.files_schema import CreateFileRequestSchema
 from clients.exercises.exercises_client import get_exercises_client
 from clients.exercises.exercises_schema import CreateExerciseRequestSchema
-from tools.fakers import fake
+
 
 public_users_client = get_public_users_client()
 
-create_user_request = CreateUserRequestSchema(
-    email=fake.email(),
-    password="qwert",
-    last_name="Ivanov",
-    first_name="Ivan",
-    middle_name="Ivanovich"
-)
+create_user_request = CreateUserRequestSchema()
 create_user_response = public_users_client.create_user(create_user_request)
+
 authentication_user = AuthenticationUserSchema(
     email=create_user_request.email,
     password=create_user_request.password
@@ -29,31 +24,16 @@ courses_client = get_courses_client(authentication_user)
 exercises_client = get_exercises_client(authentication_user)
 
 create_file_request = CreateFileRequestSchema(
-    filename="avatar.png",
-    directory="courses",
     upload_file="./testdata/files/avatar.png"
 )
 create_file_response = files_client.create_file(create_file_request)
 
 create_course_request = CreateCourseRequestSchema(
-    title="Python automation",
-    max_score=100,
-    min_score=10,
-    description="Python API automation course",
-    estimated_time="2 weeks",
     preview_file_id=create_file_response.file.id,
     created_by_user_id=create_user_response.user.id
 )
 create_course_response = courses_client.create_course(create_course_request)
 
-create_exercise_request = CreateExerciseRequestSchema(
-    title="Exercise 1",
-    course_id=create_course_response.course.id,
-    max_score=5,
-    min_score=1,
-    order_index=0,
-    description="Exercise 1",
-    estimated_time="5 minutes"
-)
+create_exercise_request = CreateExerciseRequestSchema()
 create_exercise_response = exercises_client.create_exercise(create_exercise_request)
 print("Create exercise data", create_exercise_response)
