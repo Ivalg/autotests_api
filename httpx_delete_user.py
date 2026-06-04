@@ -1,9 +1,9 @@
 import httpx
-from tools.fakers import get_random_email
+from tools.fakers import fake
 
 # Создаем пользователя
 create_user_payload = {
-    "email": get_random_email(),
+    "email": fake.email(),
     "password": "qwerty",
     "lastName": "Ivanov",
     "firstName": "Ivan",
@@ -13,7 +13,7 @@ create_user_response = httpx.post("http://localhost:8000/api/v1/users", json=cre
 create_user_response_data = create_user_response.json()
 print("Create user data:", create_user_response_data)
 
-# Проходим аунтификацию
+# Проходим аутентификацию
 login_payload = {
     "email": create_user_payload["email"],
     "password": create_user_payload["password"]
@@ -33,5 +33,3 @@ delete_user_response = httpx.delete(
 delete_user_response_data = delete_user_response.json()
 print("Delete user data:", delete_user_response_data)
 print("Status code:", delete_user_response.status_code)
-
-

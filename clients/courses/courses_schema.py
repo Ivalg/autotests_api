@@ -43,7 +43,7 @@ class CreateCourseResponseSchema(BaseModel):
 
 
 class UpdateCourseRequestSchema(BaseModel):
-    """Описание структуры обновления курса"""
+    """Описание структуры запроса обновления курса"""
     model_config = ConfigDict(populate_by_name=True)
 
     title: str | None = None
