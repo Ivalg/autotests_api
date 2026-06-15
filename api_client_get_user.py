@@ -17,7 +17,7 @@ authentication_user = AuthenticationUserSchema(
     email=create_user_request.email,
     password=create_user_request.password
 )
-# Инициализируем клиент PrivateUserClient
+# Инициализируем клиент PrivateUsersClient
 private_users_client = get_private_users_client(authentication_user)
 
 # Отправляем GET запрос на получение данных пользователя
