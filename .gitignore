@@ -22,3 +22,6 @@ __pycache__/
 # Секреты
 .env
 /example.txt
+
+# Игнорировать папку
+tests/hidden/
