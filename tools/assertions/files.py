@@ -1,3 +1,5 @@
+from clients.errors_schema import ValidationErrorResponseSchema, ValidationErrorSchema
+from tools.assertions.errors import assert_validation_error_response
 from tools.assertions.base import assert_equal
 from clients.files.files_schema import (CreateFileRequestSchema, CreateFileResponseSchema,
                                         GetFileResponseSchema, FileSchema)
@@ -38,3 +40,43 @@ def assert_get_file_response(get_file_response: GetFileResponseSchema, create_fi
     :return: AssertionError если данные файла не совпадают.
     """
     assert_file(get_file_response.file, create_file_response.file)
+
+
+def assert_create_file_with_empty_filename_response(actual: ValidationErrorResponseSchema):
+    """
+    Проверяет что ответ на создание файла с пустым именем файла соответствует ожидаемой валидационной ошибке.
+    :param actual: Ответ от API с ошибкой валидации.
+    :return: AssertionError если фактический ответ не соответствует ожидаемому.
+    """
+    expected = ValidationErrorResponseSchema(
+        details=[
+            ValidationErrorSchema(
+                type="string_too_short",
+                input="",
+                context={"min_length": 1},
+                message="String should have at least 1 character",
+                location=["body", "filename"]
+            )
+        ]
+    )
+    assert_validation_error_response(actual, expected)
+
+
+def assert_create_file_with_empty_directory_response(actual: ValidationErrorResponseSchema):
+    """
+    Проверяет что ответ на создание файла с пустым значением директории соответствует ожидаемой валидационной ошибке.
+    :param actual: Ответ от API с ошибкой валидации.
+    :return: AssertionError если фактический ответ не соответствует ожидаемому.
+    """
+    expected = ValidationErrorResponseSchema(
+        details=[
+            ValidationErrorSchema(
+                type="string_too_short",
+                input="",
+                context={"min_length": 1},
+                message="String should have at least 1 character",
+                location=["body", "directory"]
+            )
+        ]
+    )
+    assert_validation_error_response(actual, expected)
